@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, FileText } from "lucide-react";
@@ -12,113 +11,99 @@ const Login = () => {
   const [loginType, setLoginType] = useState("hospital");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-medical-light to-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-muted/30 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        {/* Header */}
+        {/* Header with icon */}
         <div className="text-center mb-8">
-          <div className="mb-4 flex justify-center">
-            <div className="bg-primary p-3 rounded-lg">
-              <FileText className="h-8 w-8 text-primary-foreground" />
+          <div className="flex items-center justify-between mb-6">
+            <div></div>
+            <h1 className="text-3xl font-bold text-slate-700">Welcome Back</h1>
+            <div className="bg-slate-100 p-2 rounded-lg">
+              <FileText className="h-6 w-6 text-slate-600" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome Back</h1>
-          <p className="text-muted-foreground">Sign in to access your health records</p>
+          <p className="text-slate-500 text-base">Sign in to access your health records</p>
         </div>
 
-        {/* Login Form */}
-        <Card className="shadow-lg">
-          <CardHeader className="pb-4">
-            <h2 className="text-2xl font-semibold text-center">Login</h2>
-            <p className="text-sm text-muted-foreground text-center">
+        {/* Login Card */}
+        <Card className="shadow-lg border-0 bg-white">
+          <CardHeader className="text-center pb-6 pt-8">
+            <h2 className="text-2xl font-bold text-slate-800 mb-2">Login</h2>
+            <p className="text-slate-500 text-sm">
               Choose your login type and enter your credentials
             </p>
           </CardHeader>
-          <CardContent>
-            <Tabs value={loginType} onValueChange={setLoginType} className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="hospital" className="text-sm">Hospital</TabsTrigger>
-                <TabsTrigger value="patient" className="text-sm">Patient</TabsTrigger>
-              </TabsList>
+          <CardContent className="px-8 pb-8">
+            {/* Custom Tabs */}
+            <div className="mb-8">
+              <div className="bg-slate-100 p-1 rounded-lg grid grid-cols-2 gap-1">
+                <button
+                  onClick={() => setLoginType("hospital")}
+                  className={`py-2 px-4 rounded-md text-sm font-medium transition-all ${
+                    loginType === "hospital"
+                      ? "bg-white text-slate-800 shadow-sm"
+                      : "text-slate-600 hover:text-slate-800"
+                  }`}
+                >
+                  Hospital
+                </button>
+                <button
+                  onClick={() => setLoginType("patient")}
+                  className={`py-2 px-4 rounded-md text-sm font-medium transition-all ${
+                    loginType === "patient"
+                      ? "bg-white text-slate-800 shadow-sm"
+                      : "text-slate-600 hover:text-slate-800"
+                  }`}
+                >
+                  Patient
+                </button>
+              </div>
+            </div>
+
+            {/* Form Fields */}
+            <div className="space-y-6">
+              <div>
+                <label className="block text-slate-700 font-medium mb-2">Username</label>
+                <Input
+                  type="text"
+                  placeholder="Enter Username"
+                  className="h-12 border-slate-200 bg-slate-50 text-slate-700 placeholder:text-slate-400"
+                />
+              </div>
               
-              <TabsContent value="hospital" className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="hospital-username">Username</Label>
+              <div>
+                <label className="block text-slate-700 font-medium mb-2">Password</label>
+                <div className="relative">
                   <Input
-                    id="hospital-username"
-                    type="text"
-                    placeholder="Enter Username"
-                    className="h-12"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter Password"
+                    className="h-12 border-slate-200 bg-slate-50 text-slate-700 placeholder:text-slate-400 pr-12"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="hospital-password">Password</Label>
-                  <div className="relative">
-                    <Input
-                      id="hospital-password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter Password"
-                      className="h-12 pr-10"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                </div>
-                
-                <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Login
-                </Button>
-              </TabsContent>
+              </div>
               
-              <TabsContent value="patient" className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="patient-username">Username</Label>
-                  <Input
-                    id="patient-username"
-                    type="text"
-                    placeholder="Enter Username"
-                    className="h-12"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="patient-password">Password</Label>
-                  <div className="relative">
-                    <Input
-                      id="patient-password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter Password"
-                      className="h-12 pr-10"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                </div>
-                
-                <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Login
-                </Button>
-              </TabsContent>
-            </Tabs>
+              {/* Login Button */}
+              <Button className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg">
+                Login
+              </Button>
+            </div>
             
-            <div className="text-center space-y-4 mt-6">
-              <Link to="/forgot-password" className="text-primary hover:underline text-sm">
+            {/* Footer Links */}
+            <div className="text-center mt-8 space-y-4">
+              <Link to="/forgot-password" className="block text-blue-500 hover:text-blue-600 font-medium">
                 Forgot Your Password?
               </Link>
               
-              <div className="text-sm text-muted-foreground">
+              <div className="text-slate-600">
                 Don't have an account?{" "}
-                <Link to="/register" className="text-primary hover:underline">
+                <Link to="/register" className="text-blue-500 hover:text-blue-600 font-medium">
                   Create Account
                 </Link>
               </div>
