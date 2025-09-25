@@ -45,12 +45,14 @@ const Register = () => {
                   <span className="text-slate-700 font-medium">Patient Management System</span>
                 </div>
               </div>
-              <Button 
-                variant="outline" 
-                className="w-full h-12 border-slate-300 text-slate-700 hover:bg-slate-50 font-medium"
-              >
-                Register as Hospital
-              </Button>
+              <Link to="/hospital-register">
+                <Button 
+                  variant="outline" 
+                  className="w-full h-12 border-slate-300 text-slate-700 hover:bg-slate-50 font-medium"
+                >
+                  Register as Hospital
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
