@@ -101,6 +101,23 @@ const HospitalRegister = () => {
             </Button>
           </div>
         </div>
+
+        {/* Demo NABH Numbers */}
+        <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 mt-6">
+          <div className="mb-2">
+            <span className="font-semibold text-teal-800">Valid NABH Numbers for Demo:</span>
+          </div>
+          <div className="text-sm text-teal-700">
+            NABH2023001, NABH2023002, NABH2023003, NABH2024001, NABH2024002
+          </div>
+        </div>
+
+        {/* Footer Text */}
+        <div className="text-center mt-6">
+          <p className="text-slate-500 text-sm">
+            By registering, you confirm that your institution holds valid NABH accreditation
+          </p>
+        </div>
       </div>
     </div>
   );
