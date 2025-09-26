@@ -3,6 +3,7 @@ import { Users, Shield, Calendar, ChevronDown, Settings, FileText, UserPlus, Act
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -17,15 +18,17 @@ import {
 } from "@/components/ui/sidebar";
 
 const sidebarItems = [
-  { title: "Dashboard", icon: BarChart3, active: true },
-  { title: "Patient Records", icon: Users },
-  { title: "New Registration", icon: UserPlus },
-  { title: "Medical Entry", icon: Activity },
-  { title: "Reports", icon: FileText },
-  { title: "Settings", icon: Settings },
+  { title: "Dashboard", icon: BarChart3, path: "/hospital-dashboard" },
+  { title: "Patient Records", icon: Users, path: "/patient-records" },
+  { title: "New Registration", icon: UserPlus, path: "/new-registration" },
+  { title: "Medical Entry", icon: Activity, path: "/medical-entry" },
+  { title: "Reports", icon: FileText, path: "/reports" },
+  { title: "Settings", icon: Settings, path: "/settings" },
 ];
 
 function HospitalSidebar() {
+  const location = useLocation();
+  
   return (
     <Sidebar className="w-60">
       <SidebarContent>
@@ -44,19 +47,22 @@ function HospitalSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {sidebarItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    asChild
-                    className={item.active ? "bg-blue-500 text-white hover:bg-blue-600" : "text-slate-600 hover:bg-slate-100"}
-                  >
-                    <a href="#" className="flex items-center gap-3 px-4 py-2">
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {sidebarItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton 
+                      asChild
+                      className={isActive ? "bg-blue-500 text-white hover:bg-blue-600" : "text-slate-600 hover:bg-slate-100"}
+                    >
+                      <Link to={item.path} className="flex items-center gap-3 px-4 py-2">
+                        <item.icon className="h-5 w-5" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -182,9 +188,11 @@ const HospitalDashboard = () => {
                     <p className="text-slate-500 mb-6">
                       No recent patient records found. Start by registering new patients.
                     </p>
-                    <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-                      <UserPlus className="h-4 w-4 mr-2" />
-                      Register New Patient
+                    <Button className="bg-blue-500 hover:bg-blue-600 text-white" asChild>
+                      <Link to="/new-registration">
+                        <UserPlus className="h-4 w-4 mr-2" />
+                        Register New Patient
+                      </Link>
                     </Button>
                   </div>
                 </div>
