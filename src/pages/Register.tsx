@@ -80,9 +80,11 @@ const Register = () => {
                   <span className="text-slate-700 font-medium">24/7 Access to Records</span>
                 </div>
               </div>
-              <Button className="w-full h-12 bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-medium">
-                Register as Patient
-              </Button>
+              <Link to="/patient-registration">
+                <Button className="w-full h-12 bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-medium">
+                  Register as Patient
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>

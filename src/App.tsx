@@ -13,6 +13,9 @@ import NewRegistration from "./pages/NewRegistration";
 import MedicalEntry from "./pages/MedicalEntry";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import PatientRegistration from "./pages/PatientRegistration";
+import OTPVerification from "./pages/OTPVerification";
+import AccountSetup from "./pages/AccountSetup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/medical-entry" element={<MedicalEntry />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/patient-registration" element={<PatientRegistration />} />
+          <Route path="/otp-verification" element={<OTPVerification />} />
+          <Route path="/account-setup" element={<AccountSetup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
