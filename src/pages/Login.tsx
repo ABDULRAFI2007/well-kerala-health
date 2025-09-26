@@ -4,11 +4,21 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loginType, setLoginType] = useState("hospital");
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (loginType === "hospital") {
+      navigate("/hospital-dashboard");
+    } else {
+      // Patient login logic here
+      console.log("Patient login");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-muted/30 flex items-center justify-center p-6">
@@ -84,7 +94,10 @@ const Login = () => {
               </div>
               
               {/* Login Button */}
-              <Button className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg">
+              <Button 
+                onClick={handleLogin}
+                className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg"
+              >
                 Login
               </Button>
             </div>
