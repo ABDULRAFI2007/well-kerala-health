@@ -15,8 +15,7 @@ const Login = () => {
     if (loginType === "hospital") {
       navigate("/hospital-dashboard");
     } else {
-      // Patient login logic here
-      console.log("Patient login");
+      navigate("/patient-dashboard");
     }
   };
 
